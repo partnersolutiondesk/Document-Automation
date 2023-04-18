@@ -13,13 +13,6 @@ def postprocess(filename):
 			updated_rows[-1]['Item No'] += ' ' + row['Item No']
 
 		else:
-			prev_qty = row['Qty']
-
-			prev_unit_price = row['Unit Price']
-
-			prev_total_price = row['Total Price']
-
-
 			updated_rows.append(row)
 	updated_df = pd.DataFrame(updated_rows)
 
