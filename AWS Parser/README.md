@@ -21,9 +21,16 @@ We have used AWS-textractor as a third party parser for this demo
 * Upload it to the control room by browsing to manage->packages 
 * Click on add package and upload the jar file
 
+![image](https://github.com/hasnainsyed73/Document-Automation/assets/129178965/7c3f5695-a55e-4fdc-9eeb-7510309e817b)
+
+  
+
 #### Step 3:
 * Go to Security credentials
 * Create your credentials(secret key and access key)
+
+ ![image](https://github.com/hasnainsyed73/Document-Automation/assets/129178965/f361dd9e-1178-4533-ba2b-de0cf7b845ea)
+
 
 #### Step 4:
 * Go to the learning instance page and click on 'configure parser' button
@@ -33,6 +40,11 @@ We have used AWS-textractor as a third party parser for this demo
 * Pick the credentials that you created in step 2.
 * Click on next.
 * Upload the JSON file with the field details
+ <img width="954" alt="image" src="https://github.com/hasnainsyed73/Document-Automation/assets/129178965/ed7c1c3f-17eb-4114-84c6-f24e1e8f3873">
+
+ ![image](https://github.com/hasnainsyed73/Document-Automation/assets/129178965/1514ce06-c36b-4b23-b2d5-e1ed8d39de97)
+
+
 
 
 #### Step 5:
@@ -41,6 +53,8 @@ We have used AWS-textractor as a third party parser for this demo
 * Select the document that was given during parser configuration.
 * The other fields will be automatically populated.
 * Click on create
+
+![image](https://github.com/hasnainsyed73/Document-Automation/assets/129178965/6a755fed-8283-473b-b1e3-d7dd96f761b1)
 
 
  
