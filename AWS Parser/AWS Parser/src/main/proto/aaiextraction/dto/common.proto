@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package aaiextraction;
+
+option java_multiple_files = true;
+
+message ExecutionStatus {
+    int32 status_code = 1;
+    string status_message = 2;
+    string message = 3;
+}
+
+message Geometry {
+    int32 x1 = 1;
+    int32 y1 = 2;
+    int32 x2 = 3;
+    int32 y2 = 4;
+}
+
+//message Version {
+//    string Version = 1;
+//}
