@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package aaiextraction;
+
+option java_multiple_files = true;
+
+import "aaiextraction/dto/common.proto";
+import "aaiextraction/dto/imagePreprocessing.proto";
+import "aaiextraction/dto/ocr.proto";
+import "aaiextraction/dto/docDetect.proto";
+import "aaiextraction/dto/extraction.proto";
+
+message EngineData {
+    EngineMetadata metadata = 1;
+    ImagePreprocessingResult image_preprocessing_result = 2;
+    OcrResult ocr_result = 3;
+    DocDetectResult doc_detect_result = 4;
+    ExtractionResult extraction_result = 5;
+}
+
+message EngineMetadata {
+    string document_id = 1;
+    string filepath = 2;
+    ExecutionStatus execution_status = 3;
+    double time_in_ms = 4;
+    string cluster_id = 5;
+    int32 number_of_pages = 6;
+}
