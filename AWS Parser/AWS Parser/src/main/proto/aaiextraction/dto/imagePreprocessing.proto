@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package aaiextraction;
+
+option java_multiple_files = true;
+
+import "aaiextraction/dto/common.proto";
+
+message ImagePreprocessingResult {
+    ImagePreprocessingMetadata metadata = 1;
+    repeated ImagePreprocessingPage pages = 2;
+}
+
+message ImagePreprocessingMetadata {
+    string documentId = 1;
+    string filepath = 2;
+    ExecutionStatus execution_status = 3;
+    double time_in_ms = 4;
+}
+
+message ImagePreprocessingPage {
+    string filepath = 1;
+    bool deskew = 2;
+    bool orientation = 3;
+    int32 render_dpi = 4;
+    int32 width = 5;
+    int32 height = 6;
+}

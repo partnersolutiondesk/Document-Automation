@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package aaiextraction;
+
+option java_multiple_files = true;
+
+import "aaiextraction/dto/common.proto";
+import "aaiextraction/dto/ocr.proto";
+
+message OcrEngineExecuteRequest {
+    repeated string filepaths = 1;
+}
+
+service OcrService {
+    rpc execute (OcrEngineExecuteRequest) returns (aaiextraction.OcrResult);
+}

@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package aaiextraction;
+
+option java_multiple_files = true;
+
+import "aaiextraction/dto/common.proto";
+
+message DocDetectResult {
+    DocDetectMetadata metadata = 1;
+    repeated FeatureObject feature_objects = 2;
+}
+
+message DocDetectMetadata {
+    ExecutionStatus execution_status = 1;
+    double time_in_ms = 2;
+}
+
+enum FeatureObjectBlockType {
+    NO_OBJECT = 0;
+    CODE_BLOCK = 1;
+    COLUMN = 2;
+    GRAPHIC = 3;
+    HANDWRITING = 4;
+    INFO_BLOCK = 5;
+    KEY_INFO_BLOCK = 6;
+    KEY_VAL_BLOCK = 7;
+    STAMP = 8;
+    TABLE = 9;
+    TABLE_HEADER_ELEM = 10;
+    TABLE_HEADER = 11;
+    TABLE_HEADER_BLOCK = 12;
+}
+
+message FeatureObject {
+    string id = 1;
+    FeatureObjectBlockType block_type = 2;
+    Geometry geometry = 3;
+    string text = 4;
+    repeated string relationships = 5;
+    repeated string feature_relationships = 6;
+    double confidence = 7;
+    double ocr_confidence = 8;
+    int32 page_num = 9;
+}

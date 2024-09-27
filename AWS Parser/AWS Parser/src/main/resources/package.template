@@ -1,0 +1,10 @@
+{
+  "name" : "AWSExtractionPackage",
+  "label" : "AWS Extraction Package",
+  "description" : "AWS Extraction Plugin that can be used in Document Automation",
+  "group" : "",
+  "artifactName" : "",
+  "packageVersion" : "",
+  "codeVersion" : "",
+  "commands" : [ ]
+}

@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package aaiextraction;
+
+option java_multiple_files = true;
+
+import "aaiextraction/dto/common.proto";
+
+message OcrResult {
+    OcrMetadata metadata = 1;
+    repeated OcrBlock blocks = 2;
+}
+
+message OcrMetadata {
+    ExecutionStatus execution_status = 1;
+    int32 number_of_pages = 2;
+    OcrLearningInstanceSetting learning_instance_setting = 3;
+    double time_in_ms = 4;
+    repeated OcrMetadataPage pages = 5;
+}
+
+message OcrLearningInstanceSetting {
+    string provider = 1;
+    string version = 2;
+    repeated string lang_codes = 3;
+}
+
+message OcrMetadataPage {
+    string id = 1;
+    int32 page_num = 2;
+    string filepath = 3;
+    string lang_code = 4;
+}
+
+enum OcrBlockType {
+    UNKNOWN_BLOCK = 0;
+    WORD = 1;
+    LINE = 2;
+}
+
+message OcrBlock {
+    string id = 1;
+    Geometry geometry = 2;
+    string text = 3;
+    OcrBlockType block_type = 4;
+    repeated string relationships = 5;
+    int32 page_num = 6;
+    double confidence = 7;
+}

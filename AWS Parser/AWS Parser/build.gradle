@@ -1,0 +1,159 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.github.johnrengelman:shadow:7.1.1"
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.13'
+        dependencies{
+            classpath files('libs/command-plugin-5.0.8.jar','libs/config-plugin-1.3.0.jar')
+        }
+    }
+}
+
+
+plugins {
+    id 'java'
+    id 'com.adarshr.test-logger' version '3.2.0'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'net.ltgt.errorprone' version '3.1.0'
+    id 'com.diffplug.spotless' version '5.0.0'
+}
+
+    repositories {
+        mavenCentral()
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+
+apply plugin: 'com.automationanywhere.build.config-plugin'
+
+    automationanywhere {
+
+        protobuf = true;
+}
+
+apply plugin: 'com.automationanywhere.command-codegen'
+
+ext {
+    log4jVersion = '2.17.1'
+    pkgGenVersion = '5.2.1'
+    toolChainVersion = '1.6.1'
+    jnaVersion = '5.3.1'
+    pkgsdksVersion = '3.2.0'
+
+    protobufVersion = '3.21.9'
+    commonProtobufVersion = '1.0.0'
+    apacheCommonsLangVersion = '3.9'
+    jacksonDatabindVersion = '2.13.4.2'
+
+    version_com_chilkatsoft_chilkat_jar = '9.5.0.93-20221208.080531-2'
+    version_org_apache_commons_commons_lang3_3_10 = '3.10'
+    version_org_jsoup_jsoup_1_15_3 = '1.15.3'
+    version_com_sun_mail_javax_mail = '1.6.1'
+    version_com_microsoft_ews_java_api_ews_java_api = '2.15'
+    version_javax_xml_ws_jaxws_api = '2.2.11'
+    version_commons_io_commons_io = '2.8.0'
+    version_com_microsoft_graph_microsoft_graph_1_7_1 = '1.7.1'
+    version_com_microsoft_azure_msal4j = '1.5.0'
+    version_org_teamdev_comfyj = '2.14'
+    version_org_teamdev_winpack = '3.12'
+    version_com_automationanywhere_jniwrap = '3.12.1'
+    version_com_outlook_api_email_outlook_api = '1.0.0-20190503.185200-1'
+    version_com_googlecode_json_simple_json_simple = '1.1.1'
+    version_org_assertj_assertj_core = '3.6.2'
+    version_junit_junit = '4.12'
+    version_org_mockito_mockito_core_2_28_2 = '2.28.2'
+    version_org_mockito_mockito_inline_2_28_2 = '2.28.2'
+    version_auth0_java_awt = '3.16.0'
+    jsonSmartVersion='2.4.7'
+    gsonVersion='2.9.0'
+    okhttpVersion='4.10.0'
+    google_oauth_version = '1.34.1'
+    daapisVersion = '1.1.0-SNAPSHOT'
+    dacommonmodules = '3.29.0-SNAPSHOT'
+    version '1.0.1'
+}
+
+group = 'com.automationanywhere'
+
+packageJson{
+    artifactName = project.name
+    group = project.group
+    author = ""
+}
+
+
+apply plugin: 'com.automationanywhere.build.config-plugin'
+
+build.dependsOn shadowJar
+jar.dependsOn commandCodeGen
+
+
+shadowJar {
+    baseName =  project.name
+    classifier = null
+    zip64 = true
+}
+
+dependencies {
+
+    implementation files('libs/bot-api-1.6.1.jar', 'libs/bot-core-api-1.6.1.jar',
+            'libs/bot-runtime-1.6.1.jar', 'libs/command-generic-3.2.0.jar', 'libs/command-processor-5.2.1.jar'
+            , 'libs/file-api-3.2.0.jar', 'libs/i18n-api-3.2.0.jar', 'libs/logger-api-3.2.0.jar')
+
+    annotationProcessor "com.automationanywhere.pkggen:command-processor:5.2.1"
+    compileOnly group: 'org.apache.logging.log4j', name: 'log4j-api', version: "$log4jVersion"
+
+    implementation "software.amazon.awssdk:textract:2.20.86"
+    implementation "software.amazon.awssdk:s3:2.20.86"
+
+    implementation "com.amazonaws:aws-java-sdk-sts:1.9.6"
+
+    implementation "org.apache.pdfbox:pdfbox:2.0.28"
+
+    implementation group: 'com.google.protobuf', name: 'protobuf-java', version: '3.21.9'
+    implementation group: 'com.google.protobuf', name: 'protobuf-java-util', version: '3.21.9'
+    implementation "org.apache.commons:commons-lang3:$apacheCommonsLangVersion"
+    implementation "com.hubspot.jackson:jackson-datatype-protobuf:0.9.9-jackson2.8-proto3"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.13.2"
+
+    implementation group: 'com.chilkatsoft', name: 'chilkat-jar', version: "$version_com_chilkatsoft_chilkat_jar"
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: "$version_org_apache_commons_commons_lang3_3_10"
+    implementation "org.jsoup:jsoup:$version_org_jsoup_jsoup_1_15_3"
+    implementation "com.surevine:ews-java-api:$version_com_microsoft_ews_java_api_ews_java_api"
+    implementation group: 'commons-io', name: 'commons-io', version: "$version_commons_io_commons_io"
+
+}
+
+configure (allprojects) {
+    apply plugin: 'com.google.protobuf'
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    protobuf {
+        generatedFilesBaseDir = "$projectDir/gen"
+        protoc {
+            if (project.hasProperty('protocPath')) {
+                path = "$protocPath"
+            } else {
+                // tells protobuf plugin where to download the proto compiler, if necessary.
+                artifact = "com.google.protobuf:protoc:3.9.1"
+            }
+        }
+    }
+}
+
+afterEvaluate {
+    def spotless = tasks.findByName('spotlessJavaApply')
+    tasks.withType(JavaCompile) {
+        finalizedBy(spotless)
+    }
+
+
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package processdiscovery;
+
+option java_multiple_files = true;
+
+import "aaiextraction/dto/imagePreprocessing.proto";
+
+message ImagePreprocessingEngineRequest {
+    repeated string filepath = 1;
+}
+
+service ImagePreprocessingService {
+    rpc execute (ImagePreprocessingEngineRequest) returns (aaiextraction.ImagePreprocessingResult);
+}
