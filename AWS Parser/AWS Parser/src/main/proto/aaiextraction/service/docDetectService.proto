@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package aaiextraction;
+
+option java_multiple_files = true;
+
+import "aaiextraction/dto/imagePreprocessing.proto";
+import "aaiextraction/dto/ocr.proto";
+import "aaiextraction/dto/docDetect.proto";
+
+message DocDetectEngineRequest {
+    aaiextraction.ImagePreprocessingResult image_preprocessing_result = 1;
+    aaiextraction.OcrResult ocr_result = 2;
+}
+
+service DocDetectService {
+    rpc execute (DocDetectEngineRequest) returns (aaiextraction.DocDetectResult);
+}
