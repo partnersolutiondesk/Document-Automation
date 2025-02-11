@@ -48,6 +48,8 @@ A list of checked checkbox coordinates.
 
 An updated JSON string reflecting the checkbox states.
 
+4. The 'Export.20250211_202312.syed' is the bot file where, the code to detect the checkboxes is being integrated with the extraction bot.
+
 ## Configuration
 
 Adjust the checkbox detection ratio in is_checkbox_checked() to fine-tune detection accuracy.
